@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Stocks de Barras de Alumínio</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Gestão de Stocks de Barras de Alumínio</h2>
+
+<table id="stockTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Comprimento</th>
+            <th>Stock Atual</th>
+            <th>Gasto</th>
+            <th>Acções</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- As entradas serão adicionadas aqui pelo JavaScript -->
+    </tbody>
+</table>
+
+<h3>Adicionar Novo Stock</h3>
+<form id="addStockForm">
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao">
+    <br><br>
+    <label for="comprimento">Comprimento:</label>
+    <input type="text" id="comprimento">
+    <br><br>
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade">
+    <br><br>
+    <button type="button" onclick="adicionarStock()">Adicionar ao Stock</button>
+</form>
+
+<script>
+    let stockID = 0;
+    let stocks = [];
+
+    function adicionarStock() {
+        const descricao = document.getElementById("descricao").value;
+        const comprimento = document.getElementById("comprimento").value;
+        const quantidade = parseInt(document.getElementById("quantidade").value);
+
+        stocks.push({
+            id: stockID++,
+            descricao: descricao,
+            comprimento: comprimento,
+            quantidade: quantidade,
+            gasto: 0
+        });
+
+        atualizarTabela();
+    }
+
+    function gastarStock(id) {
+        const quantidade = prompt("Quantidade a gastar:", 1);
+        if (quantidade && stocks[id]) {
+            stocks[id].gasto += parseInt(quantidade);
+            if (stocks[id].gasto > stocks[id].quantidade) {
+                alert("Gasto excede o stock disponível!");
+                stocks[id].gasto -= parseInt(quantidade);
+            }
+        }
+        atualizarTabela();
+    }
+
+    function atualizarTabela() {
+        const tbody = document.getElementById("stockTable").querySelector("tbody");
+        tbody.innerHTML = "";
+
+        for (const stock of stocks) {
+            const tr = document.createElement("tr");
+
+            ["id", "descricao", "comprimento", "quantidade", "gasto"].forEach(key => {
+                const td = document.createElement("td");
+                td.textContent = stock[key];
+                tr.appendChild(td);
+            });
+
+            const actionTd = document.createElement("td");
+            const actionButton = document.createElement("button");
+            actionButton.textContent = "Gastar";
+            actionButton.onclick = () => gastarStock(stock.id);
+            actionTd.appendChild(actionButton);
+            tr.appendChild(actionTd);
+
+            tbody.appendChild(tr);
+        }
+    }
+
+</script>
+
+</body>
+</html>
