@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Stocks de Barras de Alumínio</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Gestão de Stocks de Barras de Alumínio</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Comprimento</th>
+            <th>Quantidade em Stock</th>
+            <th>Acções</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Exemplo de entrada -->
+        <tr>
+            <td>1</td>
+            <td>Barra Alumínio T5</td>
+            <td>3m</td>
+            <td>50</td>
+            <td><button>Usar</button></td>
+        </tr>
+        <!-- Adicione mais entradas conforme necessário -->
+    </tbody>
+</table>
+
+<h3>Adicionar Novo Stock</h3>
+<form>
+    <label for="descricao">Descrição:</label>
+    <input type="text" id="descricao" name="descricao">
+    <br><br>
+    <label for="comprimento">Comprimento:</label>
+    <input type="text" id="comprimento" name="comprimento">
+    <br><br>
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" name="quantidade">
+    <br><br>
+    <input type="submit" value="Adicionar ao Stock">
+</form>
+
+</body>
+</html>
